@@ -1,0 +1,104 @@
+html, body {
+	width: 100vw !important;
+	overflow-x: hidden !important;
+}
+
+.background {
+	width: 100vw;
+	height: calc(100vh - 64px);
+    background-image: url('iceland/img/index_background.jpg');
+}
+
+.main-navbar {
+	background-color: #93746b;
+	width: 100vw !important;
+}
+
+.main-menu-items {
+	font-weight: bold !important;
+}
+
+.brand-logo {
+	margin-left: 20px;
+}
+
+.index-header {
+	color: #785e56;
+	font-weight: bold;
+	font-size: 35px;
+}
+
+.index-section {
+	display: flex;
+	margin-top: 30px;
+}
+
+.index-text {
+	color: #785e56;
+	font-size: 16px;
+}
+
+.index-pic-right {
+	height: 200px;
+	margin-left: 50px;
+}
+
+.index-pic-left {
+	height: 170px;
+	margin-right: 50px;
+}
+
+.filter-block {
+	background-color: #f5f5f5;
+	width: 100%;
+	height: 200px;
+	margin-top: 50px;
+	padding: 5px 20px 5px 20px;
+}
+
+.formulas-column {
+	padding-left: 70px !important;
+}
+
+.filter-title {
+	color: #452f29;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.constructions-common {
+	display: flex;
+	margin-top: 20px;
+}
+
+.alphabet {
+	color: #785e56;
+	font-size: 20px;
+	letter-spacing: 10px;
+}
+
+.letter {
+	color: #452f29;
+	font-size: 20px;
+	font-weight: bold;
+
+}
+
+.construction {
+	font-size: 18px;
+	word-spacing: 5px;
+	color: #785e56;
+}
+
+.second-block {
+	margin-left: 100px;
+}
+
+input[type=range] + .thumb {
+	background-color: #7b7b7b !important;
+}
+
+.range-field {
+	color: #452f29;
+	font-size: 16px;
+}

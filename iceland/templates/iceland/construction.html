@@ -1,0 +1,44 @@
+{% extends 'iceland/base.html'%}
+{% load static %}
+{% load commands %}
+
+{% block content %}
+
+<div class="row main-row">
+    <div class="col s1"></div>
+
+    <div class="col s10">
+    	<p class="construction-header">{{ construction.short_text|split_constr }}</p>
+    	<div class="construction-block row">
+    		<div class="col s3 desc-block">
+    			<p class="construction-desc"><span class="bold">Частотность в корпусе:</span> {{ corpus_freq }}</p>
+    			<p class="construction-desc"><span class="bold">Кол-во текстов:</span> {{ texts_num }} из 49</p>
+    			<p class="construction-desc"><span class="bold">Кол-во вариантов:</span> {{ vars_num }}</p>
+    		</div>
+
+    		<div class="col s9 items-block">
+    			{% for var in variants_counter %}
+    			  <p class="construction-text">{{ var.0|split_constr }}    <span class="bold">({{ var.1 }})</span></p>
+    			{% endfor %}
+    		</div>
+    	</div>
+
+    	{% for example in examples %}
+
+    	<div class="corpus-block row">
+    		<div class="col s3">
+    			<p class="corpus-text"><span class="bold">{{ example.0|split_constr }}</span></p>
+    		</div>
+
+    		<div class="col s9 corpus-block">
+    			<p class="corpus-text">{{ example.1|safe }}</p>
+    		</div>
+    	</div>
+
+    	{% endfor %}
+    </div>
+
+    <div class="col s1"></div>
+</div>
+
+{% endblock %}

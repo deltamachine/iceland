@@ -1,0 +1,222 @@
+html, body {
+	width: 100vw !important;
+	overflow-x: hidden !important;
+}
+
+.background {
+	width: 100vw;
+	height: calc(100vh - 64px);
+    background-image: url('/static/iceland/img/index_background.jpg');
+}
+
+.screen {
+	position: absolute;
+	top: 64px;
+	left: 0px;
+	width: 100vw;
+	height: calc(100vh - 64px);
+    background-color: #93746b;
+    opacity: 0.5;
+}
+
+.main-header{
+	position: absolute;
+	color: white;
+	top: 230px;
+	text-align: center;
+	width: 100%;
+	font-weight: bold;
+	font-size: 70px;
+}
+
+.desc-button-block {
+	position: absolute;
+	top: calc(100vh - 74px);
+	text-align: center;
+	width: 100%;
+}
+
+.desc-button {	
+	background-color: #452f29 !important;
+}
+
+.filler-block {
+	position: absolute;
+	top: calc(100vh - 64px);
+}
+
+.main-navbar {
+	background-color: #93746b;
+	width: 100vw !important;
+}
+
+.main-menu-items {
+	font-weight: bold !important;
+	font-size: 16px !important;
+}
+
+.index-header {
+	color: #785e56;
+	font-weight: bold;
+	font-size: 35px;
+}
+
+.index-section {
+	display: flex;
+	margin-top: 30px;
+}
+
+.index-text {
+	color: #785e56;
+	font-size: 16px;
+}
+
+.index-pic-right {
+	height: 160px;
+	margin-left: 50px;
+}
+
+.index-pic-left {
+	height: 160px;
+	margin-right: 50px;
+}
+
+.filter-block {
+	background-color: #f5f5f5;
+	width: 100%;
+	margin-top: 50px;
+	padding: 5px 20px 5px 20px;
+}
+
+.formulas-column {
+	padding-left: 70px !important;
+}
+
+.filter-title {
+	color: #452f29;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.constructions-common {
+	display: flex;
+	margin-top: 20px;
+}
+
+.alphabet {
+	color: #785e56;
+	font-size: 18px;
+	letter-spacing: 10px;
+	line-height: 2.5rem;
+}
+
+.letter-link {
+	text-decoration: none !important;
+	color: #785e56;
+}
+
+.letter {
+	color: #452f29;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.construction {
+	font-size: 16px;
+	word-spacing: 5px;
+	color: #785e56;
+}
+
+.second-block {
+	margin-left: 100px;
+}
+
+input[type=range] + .thumb {
+	background-color: #7b7b7b !important;
+}
+
+.range-field {
+	color: #452f29;
+	font-size: 16px;
+}
+
+.construction-header {
+	font-size: 20px;
+	letter-spacing: 2px;
+	color: #785e56;
+	margin-top: 60px;
+}
+
+.construction-block {
+	background-color: #f5f5f5;
+	width: 100%;
+	margin-top: 20px;
+	padding: 20px 20px 20px 20px;
+}
+
+.construction-desc {
+	font-size: 16px;
+	color: #452f29;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.desc-block {
+	border-right: 3px solid #ded7d6;
+}
+
+.items-block {
+	padding-left: 50px !important;
+}
+
+.corpus-block {
+	padding-left: 30px !important;
+}
+
+.construction-text {
+	font-size: 16px;
+	color: #452f29;
+}
+
+.corpus-text {
+	font-size: 16px;
+	color: #452f29;
+}
+
+.construction-occurence {
+	color: #a48982;
+	font-weight: bold;
+}
+
+form p {
+	margin-bottom: 30px !important;
+	margin-top: 30px !important; 
+}
+
+.submit-button {
+	background-color: #7b7b7b !important;
+	color: white;
+	width: 120px !important;
+	height: 30px !important;
+	border-radius: 3px !important;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	line-height: 30px !important;
+	margin-bottom: 20px;
+	margin-top: 50px; 
+	text-transform: none !important;
+}
+
+/**** Custom styles for noUiSlider ****/
+.noUi-connect {
+	background: #7b7b7b !important;
+}
+.noUi-horizontal .noUi-handle, .noUi-vertical .noUi-handle {
+	background: #7b7b7b !important;
+}
+.noUi-target.noUi-horizontal .noUi-tooltip {
+	background-color: #7b7b7b !important;
+}

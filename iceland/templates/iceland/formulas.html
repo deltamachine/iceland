@@ -1,0 +1,73 @@
+{% extends 'iceland/base.html'%}
+{% load static %}
+{% load commands %}
+
+{% block js %}
+<script src="{% static 'iceland/js/slider_form.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row main-row">
+    <div class="col s1"></div>
+
+    <div class="col s3">
+    	<div class="filter-block">
+    		<p class="filter-title">Фильтрация</p>
+
+    		<form action="#" method="get">
+    			{% csrf_token %}
+			    <p class="range-field">
+			      <span>Количество слов</span>
+			      <div id="slider_words"></div>
+			      <input type="hidden" name="words_min" value="" id="words-min-input">
+			      <input type="hidden" name="words_max" value="" id="words-max-input">
+			    </p>
+
+			    <p class="range-field">
+			      <span>Количество вариантов</span>
+			      <div id="slider_vars"></div>
+			      <input type="hidden" name="vars_min" value="" id="vars-min-input">
+			      <input type="hidden" name="vars_max" value="" id="vars-max-input">
+			    </p>
+
+			    <p class="range-field">
+			      <span>Количество текстов</span>
+			      <div id="slider_texts"></div>
+			      <input type="hidden" name="texts_min" value="" id="texts-min-input">
+			      <input type="hidden" name="texts_max" value="" id="texts-max-input">
+			    </p>
+
+			    <p class="range-field">
+			      <span>Частотность</span>
+			      <div id="slider_freq"></div>
+			      <input type="hidden" name="freq_min" value="" id="freq-min-input">
+			      <input type="hidden" name="freq_max" value="" id="freq-max-input">
+			    </p>
+
+			    <button class="btn submit-button" type="submit" name="filter" value="filter">Применить</button>
+			</form>
+    	</div>
+    </div>
+
+	<div class="col s7 formulas-column">
+		<p class="index-header">Конструкции</p>
+
+		<div class="alphabet">{% for letter in alphabet %} <a class="letter-link" href="#letter_{{ letter.id }}">{{ letter.letter }}</a> {% endfor %}</div>
+
+		<div class="constructions-common">
+			<div class="constructions-block">
+				<p class="letter" id="letter_1">A</p>
+
+				{% for object in object_list %}
+				  <a href="{% url 'construction' object.id %}"><p class="construction">{{ object.short_text|split_constr }}</p></a>
+				{% endfor %}		
+			</div>
+		</div>
+	</div>
+
+    <div class="col s1"></div>
+</div>
+
+{% endblock %}
