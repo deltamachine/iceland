@@ -1,43 +1,43 @@
 import re
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.list import ListView
-from .models import NgramShort, NgramFull, Letter, Word, Sentence
-from django.db.models import Count
+from django.views.decorators.http import require_http_methods
+from django.utils.decorators import method_decorator
+from .models import NgramShort, NgramFull, Letter
+from .helpers import ConstructionHelper
+from .custom_pagination import AlphabetPaginator
 
 
+@method_decorator(require_http_methods(['GET']), name='dispatch')
 class IndexView(TemplateView):
     template_name = 'iceland/index.html'
 
 
+@method_decorator(require_http_methods(['GET']), name='dispatch')
 class ConstructionListView(ListView):
     template_name = 'iceland/formulas.html'
     model = NgramShort
 
     def get_context_data(self, **kwargs):
-        alphabet = Letter.objects.all().order_by('letter')
-
         context = super().get_context_data(**kwargs)
-        context['alphabet'] = alphabet
+
+        page_index = self.request.GET.get('page', 1)
+        paginator = AlphabetPaginator(self.get_queryset(), 20)
+
+        context['alphabet'] = Letter.objects.all().order_by('letter')
+        context['paginator'] = paginator
+        context['page_obj'] = paginator.page(page_index)
+        context['letters'] = paginator.find_letters(page_index)
         
         return context
 
     def get_queryset(self):
-        data = self.request.GET
-
-        if 'filter' not in data:
-        	#временная небольшая выдача для теста
-        	queryset = NgramShort.objects.filter(letter_id=1).order_by('short_text')[:20]
-        else:
-        	queryset = NgramShort.objects.filter(letter_id=1).order_by('short_text')[:20]
-
-        	#work in progress
-        	#full_ngrams = NgramFull.objects.filter(short_ngram__in=queryset)
-
+        queryset = NgramShort.objects.all().order_by('short_text')
 
         return queryset
+     
 
-       
-
+@method_decorator(require_http_methods(['GET']), name='dispatch')
 class ConstructionDetailView(DetailView):
     model = NgramShort
     template_name = 'iceland/construction.html'
@@ -45,31 +45,10 @@ class ConstructionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         full_ngrams = NgramFull.objects.filter(short_ngram=self.object)
+        helper = ConstructionHelper(full_ngrams)
 
-        examples = []
-
-        for f in full_ngrams:
-            quote_sentences = Sentence.objects.filter(text__id=f.text_id, sent_idx__gte=f.sentence_id-2, sent_idx__lte=f.sentence_id+2)
-            quote_words = Word.objects.filter(sentence__in=quote_sentences)
-
-            sentence = Sentence.objects.get(text__id=f.text_id, sent_idx=f.sentence_id)
-            phrase = Word.objects.filter(sentence=sentence, word_idx__gte=f.word_start, word_idx__lte=f.word_end)
-
-            phrase = ' '.join([word.form for word in phrase])
-            text_bit = ' '.join([word.form for word in quote_words])
-            text_bit = re.sub('[a-záæéíóöúýþð]( ([.!?,:"»;]))', r'\2', text_bit)
-            text_bit = re.sub(' »', '»', text_bit)
-            text_bit = re.sub('« ', '«', text_bit)
-            text_bit = re.sub(phrase, '<span class="construction-occurence">%s</span>' % phrase, text_bit)
-
-            examples.append((f.full_text, text_bit))
-
-        corpus_freq = len(full_ngrams)
-        vars_num = full_ngrams.values('full_text').distinct().count()
-        texts_num = full_ngrams.values('text').distinct().count()
-
-        variants_counter = full_ngrams.values('full_text').annotate(variants_num=Count('full_text'))
-        variants_counter = [(v['full_text'], v['variants_num']) for v in variants_counter]
+        examples = helper.collect_examples()
+        corpus_freq, vars_num, texts_num, variants_counter = helper.calculate_numbers()
 
         context = super().get_context_data(**kwargs)
         context['examples'] = examples

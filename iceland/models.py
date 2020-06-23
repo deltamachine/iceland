@@ -10,6 +10,9 @@ class Clustering(models.Model):
         managed = False
         db_table = 'clustering'
 
+    def __str__(self):
+        return int(self.cluster)
+
 
 class NgramFull(models.Model):
     text = models.ForeignKey('Text', on_delete=models.CASCADE, blank=True, null=True)
@@ -23,6 +26,9 @@ class NgramFull(models.Model):
         managed = False
         db_table = 'ngram_full'
 
+    def __str__(self):
+        return self.full_text
+
 
 class NgramShort(models.Model):
     short_text = models.TextField(blank=True, null=True)
@@ -33,6 +39,9 @@ class NgramShort(models.Model):
         managed = False
         db_table = 'ngram_short'
 
+    def __str__(self):
+        return self.short_text
+
 
 class PosMask(models.Model):
     mask = models.TextField(blank=True, null=True)
@@ -40,6 +49,9 @@ class PosMask(models.Model):
     class Meta:
         managed = False
         db_table = 'pos_mask'
+
+    def __str__(self):
+        return self.mask
 
 
 class Sentence(models.Model):
@@ -50,6 +62,9 @@ class Sentence(models.Model):
         managed = False
         db_table = 'sentences'
 
+    def __str__(self):
+        return self.text
+
 
 class Text(models.Model):
     name = models.TextField(blank=True, null=True)
@@ -57,6 +72,9 @@ class Text(models.Model):
     class Meta:
         managed = False
         db_table = 'texts'
+
+    def __str__(self):
+        return self.name
 
 
 class Word(models.Model):
@@ -70,10 +88,16 @@ class Word(models.Model):
         managed = False
         db_table = 'words'
 
+    def __str__(self):
+        return self.lemma
+
 
 class Letter(models.Model):
-	letter = models.CharField(max_length=300, blank=True, null=True)
+    letter = models.CharField(max_length=300, blank=True, null=True)
 
-	class Meta:
-		managed = False
-		db_table = 'letters'
+    class Meta:
+        managed = False
+        db_table = 'letters'
+
+    def __str__(self):
+        return self.letter
